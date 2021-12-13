@@ -2,6 +2,7 @@ package cern.lsa.mapping.example.dto;
 
 import cern.lsa.mapping.example.domain.StandAloneBeamProcess;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,6 +12,7 @@ public class StandAloneBeamProcessDto extends BeamProcessDto implements StandAlo
     private String actualBeamProcessInfo;
     private boolean resident;
     private boolean isActual;
+    private List<SomeImmutableClassDto> someImmutableClassDtoList;
 
     @Override
     public boolean isActual() {
@@ -45,5 +47,11 @@ public class StandAloneBeamProcessDto extends BeamProcessDto implements StandAlo
         this.resident = resident;
     }
 
+    public List<SomeImmutableClassDto> getSomeImmutableClassDtoList() {
+        return someImmutableClassDtoList;
+    }
 
+    public void setSomeImmutableClassDtoList(List<SomeImmutableClassDto> someImmutableClassDtoList) {
+        this.someImmutableClassDtoList = someImmutableClassDtoList;
+    }
 }

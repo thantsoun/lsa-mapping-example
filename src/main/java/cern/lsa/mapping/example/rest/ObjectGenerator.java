@@ -1,9 +1,8 @@
 package cern.lsa.mapping.example.rest;
 
-import cern.lsa.mapping.example.domain.Attribute;
-import cern.lsa.mapping.example.domain.BeamProcessImpl;
-import cern.lsa.mapping.example.domain.StandAloneBeamProcessImpl;
+import cern.lsa.mapping.example.domain.*;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 public class ObjectGenerator {
@@ -40,6 +39,9 @@ public class ObjectGenerator {
         bm.setActualBeamProcessInfo("Your info here");
         bm.setResident(true);
         bm.getAttributes().put("Attr", createAttribute("Attr", 123L));
+        bm.setSomeImmutableClassList(Arrays.asList(
+                ImmutableSomeImmutableClass.builder().attr1("1st immutable => Attr 1").attr2("1st immutable => Attr 2").build(),
+                ImmutableSomeImmutableClass.builder().attr1("2nd immutable => Attr 1").attr2("2nd immutable => Attr 2").build()));
         return bm;
     }
 

@@ -1,5 +1,6 @@
 package cern.lsa.mapping.example.domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -9,6 +10,7 @@ public class StandAloneBeamProcessImpl extends BeamProcessImpl implements StandA
     private String actualBeamProcessInfo;
     private boolean resident;
     private boolean isActual;
+    private List<SomeImmutableClass> someImmutableClassList;
 
     public StandAloneBeamProcessImpl(long id, String name) {
         super(id, name);
@@ -43,4 +45,11 @@ public class StandAloneBeamProcessImpl extends BeamProcessImpl implements StandA
         this.resident = resident;
     }
 
+    public List<SomeImmutableClass> getSomeImmutableClassList() {
+        return someImmutableClassList;
+    }
+
+    public void setSomeImmutableClassList(List<SomeImmutableClass> someImmutableClassList) {
+        this.someImmutableClassList = someImmutableClassList;
+    }
 }

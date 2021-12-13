@@ -11,7 +11,8 @@ import javax.annotation.PostConstruct;
 
 @Mapper(componentModel = "spring", uses = {
         AttributeMapper.class,
-        ContextMapper.class
+        ContextMapper.class,
+        SomeImmutableClassMapper.class
 })
 public abstract class StandAloneBeamProcessMapper {
 
@@ -19,12 +20,14 @@ public abstract class StandAloneBeamProcessMapper {
     ContextMapper contextMapper;
 
     @Mappings({
-            @Mapping(target = "parentContext", source = "standAloneBeamProcess.parent")
+            @Mapping(target = "parentContext", source = "standAloneBeamProcess.parent"),
+            @Mapping(target = "someImmutableClassDtoList", source = "standAloneBeamProcess.someImmutableClassList"),
     })
     public abstract StandAloneBeamProcessDto toDto(StandAloneBeamProcessImpl standAloneBeamProcess, @org.mapstruct.Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 
     @Mappings({
-            @Mapping(target = "parent", source = "standAloneBeamProcessDto.parentContext")
+            @Mapping(target = "parent", source = "standAloneBeamProcessDto.parentContext"),
+            @Mapping(target = "someImmutableClassList", source = "standAloneBeamProcessDto.someImmutableClassDtoList"),
     })
     public abstract StandAloneBeamProcessImpl fromDto(StandAloneBeamProcessDto standAloneBeamProcessDto, @org.mapstruct.Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 

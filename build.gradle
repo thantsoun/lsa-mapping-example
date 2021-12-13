@@ -21,14 +21,17 @@ repositories {
 ext {
 	set('springCloudVersion', "2021.0.0")
 	set('mapstructVersion', "1.4.2.Final")
+	set('immutablesVersion', "2.8.8")
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation "org.immutables:value:${immutablesVersion}"
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	annotationProcessor "org.immutables:value:${immutablesVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
