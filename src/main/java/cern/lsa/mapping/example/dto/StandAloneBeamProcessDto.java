@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class StandAloneBeamProcessDto extends BeamProcessDto implements StandAloneBeamProcess {
+public class StandAloneBeamProcessDto extends BeamProcessDto {
 
     private Map<String, AttributeDto> attributes = new TreeMap<>();
     private String actualBeamProcessInfo;
     private boolean resident;
     private boolean isActual;
-    private List<SomeImmutableClassDto> someImmutableClassDtoList;
+    private List<SomeImmutableClassDto> someImmutableClassList;
 
-    @Override
     public boolean isActual() {
         return isActual;
     }
@@ -47,11 +46,11 @@ public class StandAloneBeamProcessDto extends BeamProcessDto implements StandAlo
         this.resident = resident;
     }
 
-    public List<SomeImmutableClassDto> getSomeImmutableClassDtoList() {
-        return someImmutableClassDtoList;
+    public List<SomeImmutableClassDto> getSomeImmutableClassList() {
+        return someImmutableClassList;
     }
 
-    public void setSomeImmutableClassDtoList(List<SomeImmutableClassDto> someImmutableClassDtoList) {
-        this.someImmutableClassDtoList = someImmutableClassDtoList;
+    public void setSomeImmutableClassList(List<SomeImmutableClassDto> someImmutableClassList) {
+        this.someImmutableClassList = someImmutableClassList;
     }
 }

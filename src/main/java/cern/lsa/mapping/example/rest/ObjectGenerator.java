@@ -40,8 +40,8 @@ public class ObjectGenerator {
         bm.setResident(true);
         bm.getAttributes().put("Attr", createAttribute("Attr", 123L));
         bm.setSomeImmutableClassList(Arrays.asList(
-                ImmutableSomeImmutableClass.builder().attr1("1st immutable => Attr 1").attr2("1st immutable => Attr 2").build(),
-                ImmutableSomeImmutableClass.builder().attr1("2nd immutable => Attr 1").attr2("2nd immutable => Attr 2").build()));
+                DefaultSomeImmutableClass.builder().attr1("1st immutable => Attr 1").attr2("1st immutable => Attr 2").build(),
+                DefaultSomeImmutableClass.builder().attr1("2nd immutable => Attr 1").attr2("2nd immutable => Attr 2").build()));
         return bm;
     }
 

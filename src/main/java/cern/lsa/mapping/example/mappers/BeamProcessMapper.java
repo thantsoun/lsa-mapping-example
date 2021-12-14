@@ -5,14 +5,17 @@ import cern.lsa.mapping.example.dto.BeamProcessDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 
-@Mapper(componentModel = "spring", uses = {
-        AttributeMapper.class,
-        ContextMapper.class
-})
+@Mapper(uses = {
+            ContextMapper.class
+        },
+        componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.ERROR
+)
 public abstract class BeamProcessMapper {
 
     @Autowired

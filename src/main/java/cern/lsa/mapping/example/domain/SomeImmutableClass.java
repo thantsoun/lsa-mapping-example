@@ -3,8 +3,8 @@ package cern.lsa.mapping.example.domain;
 import org.immutables.value.Value;
 
 @Value.Immutable
-//@Value.Style(init = "set*")
+@Value.Style(depluralize = true, typeImmutable = "Default*", get = { "get*", "is*", "are*" }, jdkOnly = true)
 public interface SomeImmutableClass {
-    String attr1();
-    String attr2();
+    String getAttr1();
+    String getAttr2();
 }

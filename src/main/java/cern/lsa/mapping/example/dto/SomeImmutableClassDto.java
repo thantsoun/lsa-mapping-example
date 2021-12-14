@@ -1,23 +1,16 @@
 package cern.lsa.mapping.example.dto;
 
-public class SomeImmutableClassDto {
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.immutables.value.Value;
 
-    private String attr1;
-    private String attr2;
-
-    public String getAttr1() {
-        return attr1;
-    }
-
-    public void setAttr1(String attr1) {
-        this.attr1 = attr1;
-    }
-
-    public String getAttr2() {
-        return attr2;
-    }
-
-    public void setAttr2(String attr2) {
-        this.attr2 = attr2;
-    }
+@Value.Immutable
+@Value.Style(depluralize = true, typeImmutable = "Default*", get = { "get*", "is*", "are*" }, jdkOnly = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = DefaultSomeImmutableClassDto.class, name = "SomeImmutableClassDto")
+})
+public interface SomeImmutableClassDto {
+    String getAttr1();
+    String getAttr2();
 }

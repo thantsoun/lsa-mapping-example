@@ -3,12 +3,13 @@ package cern.lsa.mapping.example.mappers;
 import cern.lsa.mapping.example.domain.Context;
 import cern.lsa.mapping.example.dto.ContextDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class ContextMapper {
 
     private final Map<String, BiFunction> instantiators = new HashMap<>();

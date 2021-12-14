@@ -26,12 +26,12 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation "org.immutables:value:${immutablesVersion}"
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	annotationProcessor "org.immutables:value:${immutablesVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

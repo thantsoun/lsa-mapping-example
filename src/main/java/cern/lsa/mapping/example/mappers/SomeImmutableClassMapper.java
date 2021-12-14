@@ -1,18 +1,15 @@
 package cern.lsa.mapping.example.mappers;
 
+import cern.lsa.mapping.example.domain.DefaultSomeImmutableClass;
 import cern.lsa.mapping.example.domain.SomeImmutableClass;
+import cern.lsa.mapping.example.dto.DefaultSomeImmutableClassDto;
 import cern.lsa.mapping.example.dto.SomeImmutableClassDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface SomeImmutableClassMapper {
-    @Mappings({
-            @Mapping(expression = "java(source.attr1())", target = "attr1"),
-            @Mapping(expression = "java(source.attr2())", target = "attr2"),
-    })
-    SomeImmutableClassDto toDto(SomeImmutableClass source);
-    SomeImmutableClass fromDto(SomeImmutableClassDto source);
+    DefaultSomeImmutableClassDto toDto(SomeImmutableClass source);
+    DefaultSomeImmutableClass fromDto(SomeImmutableClassDto source);
 }
 
