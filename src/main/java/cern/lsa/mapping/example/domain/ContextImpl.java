@@ -1,7 +1,11 @@
 package cern.lsa.mapping.example.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class)
 public abstract class ContextImpl implements Context {
 
     private Context parentContext;

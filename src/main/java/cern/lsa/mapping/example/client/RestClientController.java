@@ -25,14 +25,12 @@ public class RestClientController {
     }
 
     @GetMapping("/bms")
-    public String getBeamProcesses() {
-        BeamProcess beamProcess = restClientDtoTranslationService.getBMs();
-        return "OK";
+    public BeamProcess getBeamProcesses() {
+        return restClientDtoTranslationService.getBMs();
     }
 
     @GetMapping("/bms2")
-    public String getStandAloneBeamProcesses() {
-        StandAloneBeamProcess standAloneBeamProcess = restClientDtoTranslationService.getStandAloneBMs();
-        return "OK";
+    public StandAloneBeamProcess getStandAloneBeamProcesses() {
+        return restClientDtoTranslationService.getStandAloneBMs();
     }
 }

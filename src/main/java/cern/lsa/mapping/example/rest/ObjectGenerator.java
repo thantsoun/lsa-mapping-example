@@ -1,6 +1,7 @@
 package cern.lsa.mapping.example.rest;
 
 import cern.lsa.mapping.example.domain.*;
+import cern.lsa.mapping.example.domain.gsi.GsiBeamProcessImpl;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,34 +16,59 @@ public class ObjectGenerator {
     }
 
     public static BeamProcessImpl createBMWithHierarchies(long id, String name) {
-        BeamProcessImpl bm = createBM(id, name);
-        BeamProcessImpl parent = createBM(id -1, "Parent of " + name);
-        BeamProcessImpl child = createBM(id + 1, "Child of " + name);
-        bm.setParent(parent);
-        parent.setChildrenContexts(Collections.singletonList(bm));
-        child.setParent(bm);
-        bm.setChildrenContexts(Collections.singletonList(child));
+        BeamProcessImpl beamProcess = createBeamProcess(id, name);
+        BeamProcessImpl parent = createBeamProcess(id -1, "Parent of " + name);
+        BeamProcessImpl child = createBeamProcess(id + 1, "Child of " + name);
+        beamProcess.setParent(parent);
+        parent.setChildrenContexts(Collections.singletonList(beamProcess));
+        child.setParent(beamProcess);
+        beamProcess.setChildrenContexts(Collections.singletonList(child));
 
-        return bm;
+        return beamProcess;
     }
 
-    private static BeamProcessImpl createBM(long id, String name) {
-        BeamProcessImpl bm = new BeamProcessImpl(id, name);
-        populateBM(bm);
-        return bm;
+    private static BeamProcessImpl createBeamProcess(long id, String name) {
+        BeamProcessImpl beamProcess = new BeamProcessImpl(id, name);
+        populateBM(beamProcess);
+        return beamProcess;
+    }
+
+    private static StandAloneBeamProcessImpl createStandAloneBeamProcess(long id, String name) {
+        StandAloneBeamProcessImpl standAloneBeamProcess = new StandAloneBeamProcessImpl(id, name);
+        populateBM(standAloneBeamProcess);
+        return standAloneBeamProcess;
+    }
+
+    private static GsiBeamProcessImpl createGisBeamProcess(long id, String name) {
+        GsiBeamProcessImpl gsiBeamProcess = new GsiBeamProcessImpl(id, name);
+        populateBM(gsiBeamProcess);
+        gsiBeamProcess.setGsiString("I am a GSI class");
+        return gsiBeamProcess;
     }
 
     public static StandAloneBeamProcessImpl createStandALoneBM(long id, String name) {
-        StandAloneBeamProcessImpl bm = new StandAloneBeamProcessImpl(id, name);
-        populateBM(bm);
-        bm.setActual(true);
-        bm.setActualBeamProcessInfo("Your info here");
-        bm.setResident(true);
-        bm.getAttributes().put("Attr", createAttribute("Attr", 123L));
-        bm.setSomeImmutableClassList(Arrays.asList(
+        StandAloneBeamProcessImpl standAloneBeamProcess = createStandAloneBeamProcess(id, name);
+        addStandALoneExtraFields(standAloneBeamProcess);
+
+        GsiBeamProcessImpl parent = createGisBeamProcess(id - 1, "Parent of " + name);
+        parent.setChildrenContexts(Collections.singletonList(standAloneBeamProcess));
+        standAloneBeamProcess.setParent(parent);
+
+        BeamProcessImpl child = createBeamProcess(id + 1, "Child of " + name);
+        child.setParent(standAloneBeamProcess);
+        standAloneBeamProcess.setChildrenContexts(Collections.singletonList(child));
+
+        return standAloneBeamProcess;
+    }
+
+    private static void addStandALoneExtraFields(StandAloneBeamProcessImpl standAloneBeamProcess) {
+        standAloneBeamProcess.setActual(true);
+        standAloneBeamProcess.setActualBeamProcessInfo("Your info here");
+        standAloneBeamProcess.setResident(true);
+        standAloneBeamProcess.getAttributes().put("Attr", createAttribute("Attr", 123L));
+        standAloneBeamProcess.setSomeImmutableClassList(Arrays.asList(
                 DefaultSomeImmutableClass.builder().attr1("1st immutable => Attr 1").attr2("1st immutable => Attr 2").build(),
                 DefaultSomeImmutableClass.builder().attr1("2nd immutable => Attr 1").attr2("2nd immutable => Attr 2").build()));
-        return bm;
     }
 
     private static void populateBM(BeamProcessImpl bm) {

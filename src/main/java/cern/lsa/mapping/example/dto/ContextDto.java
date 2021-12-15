@@ -1,18 +1,18 @@
 package cern.lsa.mapping.example.dto;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = BeamProcessDto.class, name = "BeamProcessDto"),
-        @JsonSubTypes.Type(value = StandAloneBeamProcessDto.class, name = "StandAloneBeamProcessDto") }
-)
+        @JsonSubTypes.Type(value = StandAloneBeamProcessDto.class, name = "StandAloneBeamProcessDto"),
+})
 public abstract class ContextDto {
 
     private ContextDto parentContext;
