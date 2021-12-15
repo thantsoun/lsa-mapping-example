@@ -10,8 +10,8 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = BeamProcessDto.class, name = "BeamProcessDto"),
-        @JsonSubTypes.Type(value = StandAloneBeamProcessDto.class, name = "StandAloneBeamProcessDto"),
+        @JsonSubTypes.Type(value = BeamProcessDto.class, name = "beam_process"),
+        @JsonSubTypes.Type(value = StandAloneBeamProcessDto.class, name = "stand_alone_beam_process"),
 })
 public abstract class ContextDto {
 

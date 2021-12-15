@@ -8,7 +8,7 @@ import org.immutables.value.Value;
 @Value.Style(depluralize = true, typeImmutable = "Default*", get = { "get*", "is*", "are*" }, jdkOnly = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = DefaultSomeImmutableClassDto.class, name = "SomeImmutableClassDto")
+        @JsonSubTypes.Type(value = DefaultSomeImmutableClassDto.class, name = "immutable_type")
 })
 public interface SomeImmutableClassDto {
     String getAttr1();
