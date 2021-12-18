@@ -24,6 +24,7 @@ public abstract class ReferencedCircularImmutable {
     @Nullable
     abstract AtomicReference<ReferencedCircularImmutable> getParentInt();
     abstract List<AtomicReference<ReferencedCircularImmutable>> getChildrenInt();
+    abstract String getUniqueId();
     public abstract String getName();
     public abstract String getTitle();
     public abstract String getMessage();
@@ -68,7 +69,7 @@ public abstract class ReferencedCircularImmutable {
                 .get()
                 .getChildrenInt()
                 .stream()
-                .filter(child -> child.get().getName().equals(getName()) && child.get() instanceof ModifiableReferencedCircularImmutable)
+                .filter(child -> child.get().getUniqueId().equals(getUniqueId()) && child.get() instanceof ModifiableReferencedCircularImmutable)
                 .forEach(child -> child.set(this));
     }
 }

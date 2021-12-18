@@ -2,9 +2,11 @@ package cern.lsa.mapping.example.rest;
 
 import cern.lsa.mapping.example.domain.*;
 import cern.lsa.mapping.example.domain.gsi.GsiBeamProcessImpl;
+import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.UUID;
 
 public class ObjectGenerator {
 
@@ -80,5 +82,15 @@ public class ObjectGenerator {
         bm.setUser("Best user in town");
         bm.setTypeName("I have such a cool type");
         bm.setCategory("My category in not categorized");
+    }
+
+    public static ModifiableReferencedCircularImmutable createModifiableCircular(String title, String name, String message) {
+        return ModifiableReferencedCircularImmutable.create()
+                .setName(name)
+                .setMessage(message)
+                .setTitle(title)
+                .setParentInt(null)
+                .setChildrenInt(Collections.emptyList())
+                .setUniqueId(UUID.randomUUID().toString());
     }
 }

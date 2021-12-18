@@ -46,10 +46,10 @@ public class ExampleController {
 
     @GetMapping("/circular")
     public ReferencedCircularImmutable getCircular() {
-        ModifiableReferencedCircularImmutable node = ModifiableReferencedCircularImmutable.create().setName("Jack").setMessage("I am the man").setTitle("Dr.");
-        ModifiableReferencedCircularImmutable child = ModifiableReferencedCircularImmutable.create().setName("Denis").setMessage("I am the child").setTitle("Jr.");
-        ModifiableReferencedCircularImmutable sibling = ModifiableReferencedCircularImmutable.create().setName("Joan").setMessage("I am the sister").setTitle("Miss");
-        ModifiableReferencedCircularImmutable parent = ModifiableReferencedCircularImmutable.create().setName("Bob").setMessage("I am the father").setTitle("Mr.");
+        ModifiableReferencedCircularImmutable node = ObjectGenerator.createModifiableCircular("Dr.", "Jack", "I am the man");
+        ModifiableReferencedCircularImmutable child = ObjectGenerator.createModifiableCircular("Jr.", "Denis", "I am the child");
+        ModifiableReferencedCircularImmutable sibling = ObjectGenerator.createModifiableCircular("Miss", "Joan", "I am the sister");
+        ModifiableReferencedCircularImmutable parent = ObjectGenerator.createModifiableCircular("Mr.", "Bob", "I am your father");
 
         AtomicReference<ReferencedCircularImmutable> nodeRef = new AtomicReference<>(node);
         AtomicReference<ReferencedCircularImmutable> childRef = new AtomicReference<>(child);
