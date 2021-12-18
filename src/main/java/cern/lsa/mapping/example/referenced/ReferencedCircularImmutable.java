@@ -1,6 +1,7 @@
 package cern.lsa.mapping.example.referenced;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -22,8 +23,11 @@ import java.util.stream.Collectors;
 public abstract class ReferencedCircularImmutable {
 
     @Nullable
+    @JsonIgnore
     abstract AtomicReference<ReferencedCircularImmutable> getParentInt();
+    @JsonIgnore
     abstract List<AtomicReference<ReferencedCircularImmutable>> getChildrenInt();
+    @JsonIgnore
     abstract String getUniqueId();
     public abstract String getName();
     public abstract String getTitle();
