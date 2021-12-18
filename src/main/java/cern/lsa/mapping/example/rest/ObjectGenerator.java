@@ -84,13 +84,7 @@ public class ObjectGenerator {
         bm.setCategory("My category in not categorized");
     }
 
-    public static ModifiableReferencedCircularImmutable createModifiableCircular(String title, String name, String message) {
-        return ModifiableReferencedCircularImmutable.create()
-                .setName(name)
-                .setMessage(message)
-                .setTitle(title)
-                .setParentInt(null)
-                .setChildrenInt(Collections.emptyList())
-                .setUniqueId(UUID.randomUUID().toString());
+    public static CircularImmutablesObjectGenerator getCircularObjGenerator() {
+        return new CircularImmutablesObjectGenerator();
     }
 }

@@ -46,27 +46,17 @@ public class ExampleController {
 
     @GetMapping("/circular")
     public ReferencedCircularImmutable getCircular() {
-        ModifiableReferencedCircularImmutable node = ObjectGenerator.createModifiableCircular("Dr.", "Jack", "I am the man");
-        ModifiableReferencedCircularImmutable child = ObjectGenerator.createModifiableCircular("Jr.", "Denis", "I am the child");
-        ModifiableReferencedCircularImmutable sibling = ObjectGenerator.createModifiableCircular("Miss", "Joan", "I am the sister");
-        ModifiableReferencedCircularImmutable parent = ObjectGenerator.createModifiableCircular("Mr.", "Bob", "I am your father");
+        CircularImmutablesObjectGenerator circularImmutablesObjectGenerator = ObjectGenerator.getCircularObjGenerator();
+        ModifiableReferencedCircularImmutable node = circularImmutablesObjectGenerator.createModifiableCircular("Dr.", "Jack", "I am the man");
+        ModifiableReferencedCircularImmutable child = circularImmutablesObjectGenerator.createModifiableCircular("Jr.", "Denis", "I am the child");
+        ModifiableReferencedCircularImmutable sibling = circularImmutablesObjectGenerator.createModifiableCircular("Miss", "Joan", "I am the sister");
+        ModifiableReferencedCircularImmutable parent = circularImmutablesObjectGenerator.createModifiableCircular("Mr.", "Bob", "I am your father");
 
-        AtomicReference<ReferencedCircularImmutable> nodeRef = new AtomicReference<>(node);
-        AtomicReference<ReferencedCircularImmutable> childRef = new AtomicReference<>(child);
-        AtomicReference<ReferencedCircularImmutable> siblingRef = new AtomicReference<>(sibling);
-        AtomicReference<ReferencedCircularImmutable> parentRef = new AtomicReference<>(parent);
-
-        node.setChildrenInt(Collections.singletonList(childRef));
-        node.setParentInt(parentRef);
-
-        parent.setParentInt(null);
-        parent.setChildrenInt(Arrays.asList(nodeRef, siblingRef));
-
-        child.setParentInt(nodeRef);
-        child.setChildrenInt(Collections.emptyList());
-
-        sibling.setParentInt(parentRef);
-        sibling.setChildrenInt(Collections.emptyList());
+        circularImmutablesObjectGenerator.setChildren(node, Collections.singletonList(child));
+        circularImmutablesObjectGenerator.setParent(node, parent);
+        circularImmutablesObjectGenerator.setChildren(parent, Arrays.asList(node, sibling));
+        circularImmutablesObjectGenerator.setParent(sibling, parent);
+        circularImmutablesObjectGenerator.setParent(child, node);
 
         DefaultReferencedCircularImmutable nodeFinal = node.toImmutable();
 
