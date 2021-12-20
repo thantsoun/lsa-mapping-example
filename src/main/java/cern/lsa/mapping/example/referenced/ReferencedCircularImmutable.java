@@ -19,25 +19,25 @@ import java.util.stream.Collectors;
 @Value.Style(depluralize = true, typeImmutable = "Default*", get = {"get*", "is*", "are*"}, jdkOnly = true)
 @JsonIdentityInfo(property = "name", generator = ObjectIdGenerators.PropertyGenerator.class)
 @JsonSerialize(as = DefaultReferencedCircularImmutable.class)
-@JsonDeserialize(as = DefaultReferencedCircularImmutable.class)
+@JsonDeserialize(as = ModifiableReferencedCircularImmutable.class)
 public abstract class ReferencedCircularImmutable {
 
     @Nullable
-    @JsonIgnore
     abstract AtomicReference<ReferencedCircularImmutable> getParentInt();
-    @JsonIgnore
     abstract List<AtomicReference<ReferencedCircularImmutable>> getChildrenInt();
-    @JsonIgnore
     abstract String getUniqueId();
+
     public abstract String getName();
     public abstract String getTitle();
     public abstract String getMessage();
 
     @Nullable
+    @JsonIgnore
     public final ReferencedCircularImmutable getParent() {
         return getParentInt() != null ? getParentInt().get() : null;
     }
 
+    @JsonIgnore
     public final List<ReferencedCircularImmutable> getChildren() {
         return getChildrenInt().stream().map(AtomicReference::get).collect(Collectors.toUnmodifiableList());
     }

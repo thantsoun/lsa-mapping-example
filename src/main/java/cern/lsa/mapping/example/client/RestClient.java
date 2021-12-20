@@ -1,9 +1,9 @@
 package cern.lsa.mapping.example.client;
 
-import cern.lsa.mapping.example.domain.BeamProcess;
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
+import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,4 +18,6 @@ public interface RestClient {
     BeamProcessDto getBeamProcesses();
     @RequestMapping(method = RequestMethod.GET, value = "/bms2", produces = "application/json")
     StandAloneBeamProcessDto getStandAloneBeamProcesses();
+    @RequestMapping(method = RequestMethod.GET, value ="/circular")
+    ModifiableReferencedCircularImmutable getReferencedCircularImmutable();
 }

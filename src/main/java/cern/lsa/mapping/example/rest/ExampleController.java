@@ -4,7 +4,6 @@ import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
 import cern.lsa.mapping.example.mappers.MapperFacade;
-import cern.lsa.mapping.example.referenced.DefaultReferencedCircularImmutable;
 import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,8 +56,6 @@ public class ExampleController {
         circularImmutablesObjectGenerator.setParent(sibling, parent);
         circularImmutablesObjectGenerator.setParent(child, node);
 
-        DefaultReferencedCircularImmutable nodeFinal = node.toImmutable();
-
-        return nodeFinal;
+        return node.toImmutable();
     }
 }

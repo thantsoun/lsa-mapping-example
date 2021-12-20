@@ -7,6 +7,7 @@ import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
 import cern.lsa.mapping.example.mappers.MapperFacade;
+import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -36,6 +37,10 @@ public class RestClientDtoTranslationService {
     public StandAloneBeamProcess getStandAloneBMs() {
         StandAloneBeamProcessDto standAloneBeamProcessDto = restClient.getStandAloneBeamProcesses();
         return mapperFacade.fromStandAloneBeamProcessDto(standAloneBeamProcessDto);
+    }
+
+    public ReferencedCircularImmutable getReferencedCircularImmutable() {
+        return restClient.getReferencedCircularImmutable().toImmutable();
     }
 
 }
