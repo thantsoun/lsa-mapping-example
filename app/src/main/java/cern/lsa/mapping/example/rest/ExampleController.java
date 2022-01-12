@@ -1,7 +1,9 @@
 package cern.lsa.mapping.example.rest;
 
+import cern.lsa.mapping.example.domain.*;
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
+import cern.lsa.mapping.example.dto.HandcraftedClassDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
 import cern.lsa.mapping.example.mappers.MapperFacade;
 import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
@@ -57,5 +59,17 @@ public class ExampleController {
         circularImmutablesObjectGenerator.setParent(child, node);
 
         return node.toImmutable();
+    }
+
+    @GetMapping("/immutables")
+    public HandcraftedClassDto getImmutables() {
+        ImmutableParentClass parent = ObjectGenerator.createImmutableParentClass("I am the parent", Arrays.asList("Parent A", "Another Parent"));
+        ImmutableSiblingClass sibling = ObjectGenerator.createImmutableSiblingClass("I am the sibling");
+        ImmutableChildClass child = ObjectGenerator.createImmutableChildClass("I am the child", "child surname", Arrays.asList("Child A", "Another Child"), sibling);
+        HandcraftedClass handcraftedClass = new HandcraftedClass();
+        handcraftedClass.setName("hand crafted class");
+        handcraftedClass.setParent(parent);
+        handcraftedClass.setChild(child);
+        return  mapperFacade.toHandCraftedDto(handcraftedClass);
     }
 }

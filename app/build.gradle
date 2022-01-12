@@ -29,8 +29,10 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation "org.immutables:value:${immutablesVersion}"
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	implementation project(':mapstruct_spi')
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor "org.immutables:value:${immutablesVersion}"
+	annotationProcessor project(':mapstruct_spi')
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -43,4 +45,8 @@ dependencyManagement {
 
 test {
 	useJUnitPlatform()
+}
+
+compileJava {
+	options.compilerArgs += ["-Amapstruct.verbose=true"]
 }

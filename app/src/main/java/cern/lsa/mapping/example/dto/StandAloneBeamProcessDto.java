@@ -1,7 +1,5 @@
 package cern.lsa.mapping.example.dto;
 
-import cern.lsa.mapping.example.domain.StandAloneBeamProcess;
-
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;

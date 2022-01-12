@@ -2,11 +2,10 @@ package cern.lsa.mapping.example.rest;
 
 import cern.lsa.mapping.example.domain.*;
 import cern.lsa.mapping.example.domain.gsi.GsiBeamProcessImpl;
-import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.UUID;
 
 public class ObjectGenerator {
 
@@ -87,4 +86,34 @@ public class ObjectGenerator {
     public static CircularImmutablesObjectGenerator getCircularObjGenerator() {
         return new CircularImmutablesObjectGenerator();
     }
+
+    public static ImmutableChildClass createImmutableChildClass(String name, String surname, Collection<String> aliases, ImmutableSiblingClass immutableSiblingClass) {
+        return DefaultImmutableChildClass.builder()
+                .name(name)
+                .surname(surname)
+                .sibling(immutableSiblingClass)
+                .aliases(aliases)
+                .build();
+    }
+
+    public static ImmutableParentClass createImmutableParentClass(String name, Collection<String> aliases) {
+        return DefaultImmutableParentClass.builder()
+                .name(name)
+                .aliases(aliases)
+                .build();
+    }
+
+    public static ImmutableSiblingClass createImmutableSiblingClass(String name) {
+        return DefaultImmutableSiblingClass.builder()
+                .siblingName(name)
+                .build();
+    }
+
+    public static HandcraftedClass createHandCraftedClass(ImmutableParentClass immutableParentClass, ImmutableChildClass immutableChildClass) {
+        HandcraftedClass handcraftedClass = new HandcraftedClass();
+        handcraftedClass.setChild(immutableChildClass);
+        handcraftedClass.setParent(immutableParentClass);
+        return handcraftedClass;
+    }
+
 }

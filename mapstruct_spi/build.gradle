@@ -1,0 +1,23 @@
+plugins {
+	id 'java'
+}
+
+group = 'cern.lsa.mapping'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('mapstructVersion', "1.4.2.Final")
+}
+
+dependencies {
+	implementation "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+}
+
+compileJava {
+	options.compilerArgs += ["-Amapstruct.verbose=true"]
+}
