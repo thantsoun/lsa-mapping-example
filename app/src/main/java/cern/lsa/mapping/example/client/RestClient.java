@@ -2,6 +2,7 @@ package cern.lsa.mapping.example.client;
 
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
+import cern.lsa.mapping.example.dto.HandcraftedClassDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
 import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -20,4 +21,6 @@ public interface RestClient {
     StandAloneBeamProcessDto getStandAloneBeamProcesses();
     @RequestMapping(method = RequestMethod.GET, value ="/circular")
     ModifiableReferencedCircularImmutable getReferencedCircularImmutable();
+    @RequestMapping(method = RequestMethod.GET, value ="/immutables")
+    HandcraftedClassDto getHandCraftedClass();
 }

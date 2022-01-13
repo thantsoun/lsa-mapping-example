@@ -49,4 +49,8 @@ public class MapperFacade {
     public HandcraftedClassDto toHandCraftedDto(HandcraftedClass handcraftedClass) {
         return handcraftedClassMapper.toDto(handcraftedClass);
     }
+
+    public HandcraftedClass fromHandCraftedDto(HandcraftedClassDto handcraftedClassDto) {
+        return handcraftedClassMapper.fromDto(handcraftedClassDto);
+    }
 }

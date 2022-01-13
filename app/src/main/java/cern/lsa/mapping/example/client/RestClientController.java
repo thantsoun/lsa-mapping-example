@@ -2,6 +2,7 @@ package cern.lsa.mapping.example.client;
 
 import cern.lsa.mapping.example.domain.Attribute;
 import cern.lsa.mapping.example.domain.BeamProcess;
+import cern.lsa.mapping.example.domain.HandcraftedClass;
 import cern.lsa.mapping.example.domain.StandAloneBeamProcess;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,11 @@ public class RestClientController {
     @GetMapping("/bms2")
     public StandAloneBeamProcess getStandAloneBeamProcesses() {
         return restClientDtoTranslationService.getStandAloneBMs();
+    }
+
+    @GetMapping("/immutables")
+    public HandcraftedClass getHandCraftedClass() {
+        return restClientDtoTranslationService.getHandCraftedClass();
     }
 
     @GetMapping("/circular")

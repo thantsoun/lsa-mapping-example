@@ -1,4 +1,5 @@
 rootProject.name = 'lsa-mapping-example'
 
 include('mapstruct_spi')
+include('accsoft-commons-domain')
 include('app')

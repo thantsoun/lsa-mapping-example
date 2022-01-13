@@ -8,8 +8,8 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface ImmutableSiblingClassMapper {
 
-//    ImmutableSiblingClassDto toDto(ImmutableSiblingClass immutableSiblingClass);
-//    ImmutableSiblingClass fromDto(ImmutableSiblingClassDto immutableSiblingClassDto);
+    ImmutableSiblingClassDto toDto(ImmutableSiblingClass immutableSiblingClass);
+    ImmutableSiblingClass fromDto(ImmutableSiblingClassDto immutableSiblingClassDto);
 
 }
 

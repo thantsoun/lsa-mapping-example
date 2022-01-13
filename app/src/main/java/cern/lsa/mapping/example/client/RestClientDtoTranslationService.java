@@ -2,9 +2,11 @@ package cern.lsa.mapping.example.client;
 
 import cern.lsa.mapping.example.domain.Attribute;
 import cern.lsa.mapping.example.domain.BeamProcess;
+import cern.lsa.mapping.example.domain.HandcraftedClass;
 import cern.lsa.mapping.example.domain.StandAloneBeamProcess;
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
+import cern.lsa.mapping.example.dto.HandcraftedClassDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
 import cern.lsa.mapping.example.mappers.MapperFacade;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
@@ -38,6 +40,12 @@ public class RestClientDtoTranslationService {
         StandAloneBeamProcessDto standAloneBeamProcessDto = restClient.getStandAloneBeamProcesses();
         return mapperFacade.fromStandAloneBeamProcessDto(standAloneBeamProcessDto);
     }
+
+    public HandcraftedClass getHandCraftedClass() {
+        HandcraftedClassDto handcraftedClassDto = restClient.getHandCraftedClass();
+        return mapperFacade.fromHandCraftedDto(handcraftedClassDto);
+    }
+
 
     public ReferencedCircularImmutable getReferencedCircularImmutable() {
         return restClient.getReferencedCircularImmutable().toImmutable();
