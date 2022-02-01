@@ -1,10 +1,17 @@
 package cern.lsa.mapping.example.rest;
 
-import cern.lsa.mapping.example.domain.*;
+import cern.lsa.mapping.example.domain.HandcraftedClass;
+import cern.lsa.mapping.example.domain.ImmutableChildClass;
+import cern.lsa.mapping.example.domain.ImmutableParentClass;
+import cern.lsa.mapping.example.domain.ImmutableSiblingClass;
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.HandcraftedClassDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
+import cern.lsa.mapping.example.dto.cern.CernNameSurname;
+import cern.lsa.mapping.example.dto.CommonNameSurname;
+import cern.lsa.mapping.example.dto.gsi.GsiNameSurname;
+import cern.lsa.mapping.example.dto.NamesContext;
 import cern.lsa.mapping.example.mappers.MapperFacade;
 import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
@@ -71,5 +78,14 @@ public class ExampleController {
         handcraftedClass.setParent(parent);
         handcraftedClass.setChild(child);
         return  mapperFacade.toHandCraftedDto(handcraftedClass);
+    }
+
+    @GetMapping("/names")
+    public NamesContext getNamesContext() {
+        return new NamesContext(
+                new CernNameSurname("Thanos", "Tsounis", "Lukasz"),
+                GsiNameSurname.BOB_DYLAN,
+                new CommonNameSurname("Roman", "Gorbonosov")
+        );
     }
 }

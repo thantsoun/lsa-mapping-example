@@ -8,6 +8,7 @@ import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.HandcraftedClassDto;
 import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
+import cern.lsa.mapping.example.dto.NamesContext;
 import cern.lsa.mapping.example.mappers.MapperFacade;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,10 @@ public class RestClientDtoTranslationService {
     public HandcraftedClass getHandCraftedClass() {
         HandcraftedClassDto handcraftedClassDto = restClient.getHandCraftedClass();
         return mapperFacade.fromHandCraftedDto(handcraftedClassDto);
+    }
+
+    public NamesContext getContextNames() {
+        return restClient.getContextNames();
     }
 
 
