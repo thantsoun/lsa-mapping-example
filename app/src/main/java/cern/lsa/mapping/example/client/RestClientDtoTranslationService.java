@@ -1,9 +1,6 @@
 package cern.lsa.mapping.example.client;
 
-import cern.lsa.mapping.example.domain.Attribute;
-import cern.lsa.mapping.example.domain.BeamProcess;
-import cern.lsa.mapping.example.domain.HandcraftedClass;
-import cern.lsa.mapping.example.domain.StandAloneBeamProcess;
+import cern.lsa.mapping.example.domain.*;
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.HandcraftedClassDto;
@@ -56,4 +53,7 @@ public class RestClientDtoTranslationService {
         return restClient.getReferencedCircularImmutable().toImmutable();
     }
 
+    public ObjectWithMap getObjectWithMap() {
+        return restClient.getObjectWithMap();
+    }
 }

@@ -3,11 +3,16 @@ package cern.lsa.mapping.example.rest;
 import cern.lsa.mapping.example.domain.*;
 import cern.lsa.mapping.example.domain.gsi.GsiBeamProcessImpl;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class ObjectGenerator {
+
+    public static ObjectWithMap createObjectWithMap() {
+        Map<MapKey, List<MapValue>> map = new HashMap<>();
+        map.put(new MapKeyImpl("Thanos", 1), Arrays.asList(new MapValueImpl("Tsounis", 44), new MapValueImpl("Fadakis", 30)));
+        map.put(new MapKeyImpl("Roman", 2), Arrays.asList(new MapValueImpl("Gorbonosov", 42), new MapValueImpl("Abramovic", 99)));
+        return new ObjectWithMap(map, "Hello");
+    }
 
     public static Attribute createAttribute(String name, long value) {
         Attribute attribute = new Attribute();

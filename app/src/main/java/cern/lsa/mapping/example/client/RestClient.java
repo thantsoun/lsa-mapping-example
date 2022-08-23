@@ -1,5 +1,6 @@
 package cern.lsa.mapping.example.client;
 
+import cern.lsa.mapping.example.domain.ObjectWithMap;
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.HandcraftedClassDto;
@@ -26,4 +27,6 @@ public interface RestClient {
     HandcraftedClassDto getHandCraftedClass();
     @RequestMapping(method = RequestMethod.GET, value ="/names")
     NamesContext getContextNames();
+    @RequestMapping(method = RequestMethod.GET, value ="/map")
+    ObjectWithMap getObjectWithMap();
 }

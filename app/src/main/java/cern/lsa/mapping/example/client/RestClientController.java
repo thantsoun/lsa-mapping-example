@@ -1,9 +1,6 @@
 package cern.lsa.mapping.example.client;
 
-import cern.lsa.mapping.example.domain.Attribute;
-import cern.lsa.mapping.example.domain.BeamProcess;
-import cern.lsa.mapping.example.domain.HandcraftedClass;
-import cern.lsa.mapping.example.domain.StandAloneBeamProcess;
+import cern.lsa.mapping.example.domain.*;
 import cern.lsa.mapping.example.dto.NamesContext;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +18,11 @@ public class RestClientController {
 
     public RestClientController(RestClientDtoTranslationService restClientDtoTranslationService) {
         this.restClientDtoTranslationService = restClientDtoTranslationService;
+    }
+
+    @GetMapping("/map")
+    public ObjectWithMap getObjectWithMap() {
+        return restClientDtoTranslationService.getObjectWithMap();
     }
 
     @GetMapping("/attributes")

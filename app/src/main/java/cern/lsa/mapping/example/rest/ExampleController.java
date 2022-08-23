@@ -1,9 +1,6 @@
 package cern.lsa.mapping.example.rest;
 
-import cern.lsa.mapping.example.domain.HandcraftedClass;
-import cern.lsa.mapping.example.domain.ImmutableChildClass;
-import cern.lsa.mapping.example.domain.ImmutableParentClass;
-import cern.lsa.mapping.example.domain.ImmutableSiblingClass;
+import cern.lsa.mapping.example.domain.*;
 import cern.lsa.mapping.example.dto.AttributeDto;
 import cern.lsa.mapping.example.dto.BeamProcessDto;
 import cern.lsa.mapping.example.dto.HandcraftedClassDto;
@@ -29,6 +26,11 @@ public class ExampleController {
 
     public ExampleController(MapperFacade mapperFacade) {
         this.mapperFacade = mapperFacade;
+    }
+
+    @GetMapping("/map")
+    public ObjectWithMap getObjectWithMapAttributes() {
+        return ObjectGenerator.createObjectWithMap();
     }
 
     @GetMapping("/attributes")
