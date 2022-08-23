@@ -46,9 +46,7 @@ public class ObjectWithSimpleMap {
         private void writeMapEntry(JsonGenerator gen, SerializerProvider provider, Map.Entry<K, V> entry) throws IOException {
             gen.writeStartArray();
             provider.defaultSerializeValue(entry.getKey(), gen);
-            gen.writeStartArray();
             provider.defaultSerializeValue(entry.getValue(), gen);
-            gen.writeEndArray();
             gen.writeEndArray();
         }
     }
