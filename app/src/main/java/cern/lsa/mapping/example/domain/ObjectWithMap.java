@@ -40,44 +40,6 @@ public class ObjectWithMap {
         return someRandomString;
     }
 
-    public static class KeyValuePair<K, V> {
-
-        private K key;
-        private V value;
-
-        @JsonCreator
-        public KeyValuePair(@JsonProperty("key") K key, @JsonProperty("value") V value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        public K getKey() {
-            return key;
-        }
-
-        public V getValue() {
-            return value;
-        }
-    }
-
-    public static abstract class AbstractMapToPairs<K, V> extends StdConverter<Map<K, V>, List<KeyValuePair<K, V>>> {
-        @Override
-        public List<KeyValuePair<K, V>> convert(Map<K, V> value) {
-            return value.entrySet().stream().map(entry -> new KeyValuePair<>(entry.getKey(), entry.getValue())).collect(Collectors.toList());
-        }
-    }
-
-    public static abstract class AbstractPairsToMap<K, V> extends StdConverter<List<KeyValuePair<K, V>>, Map<K, V>> {
-        @Override
-        public Map<K, V> convert(List<KeyValuePair<K, V>> values) {
-            return values.stream().collect(Collectors.toMap(KeyValuePair::getKey, KeyValuePair::getValue));
-        }
-    }
-
-    public static class MyMapConverter extends AbstractMapToPairs<MapKey, List<MapValue>> {};
-
-    public static class MyMapBackConverter extends AbstractPairsToMap<MapKey, List<MapValue>> {};
-
     public static abstract class MyAbstractJsonSerializer<K, V> extends JsonSerializer<Map<K, List<V>>> {
 
         @Override
