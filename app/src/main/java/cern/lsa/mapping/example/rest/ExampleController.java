@@ -1,23 +1,19 @@
 package cern.lsa.mapping.example.rest;
 
 import cern.lsa.mapping.example.domain.*;
-import cern.lsa.mapping.example.dto.AttributeDto;
-import cern.lsa.mapping.example.dto.BeamProcessDto;
-import cern.lsa.mapping.example.dto.HandcraftedClassDto;
-import cern.lsa.mapping.example.dto.StandAloneBeamProcessDto;
+import cern.lsa.mapping.example.dto.*;
 import cern.lsa.mapping.example.dto.cern.CernNameSurname;
-import cern.lsa.mapping.example.dto.CommonNameSurname;
 import cern.lsa.mapping.example.dto.gsi.GsiNameSurname;
-import cern.lsa.mapping.example.dto.NamesContext;
 import cern.lsa.mapping.example.mappers.MapperFacade;
 import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @RestController
 public class ExampleController {
@@ -29,12 +25,28 @@ public class ExampleController {
     }
 
     @GetMapping("/map")
-    public ObjectWithListMap getObjectWithListMapAttributes() {
+    public ObjectWithListMap getObjectWithListMap() {
         return ObjectGenerator.createObjectWithListMap();
     }
 
+    @GetMapping("/map-raw")
+    public Hack getRawListMap() {
+        return new Hack(ObjectGenerator.createRawListMap());
+    }
+
+    public static class Hack {
+
+        @JsonUnwrapped
+        @JsonSerialize(using = ObjectWithListMap.MyGenericJsonSerializer.class)
+        public final Map<MapKey, List<MapValue>> hack;
+
+        public Hack(Map<MapKey, List<MapValue>> hack) {
+            this.hack = hack;
+        }
+    }
+
     @GetMapping("/map-simple")
-    public ObjectWithSimpleMap getObjectWithSimpleMapAttributes() {
+    public ObjectWithSimpleMap getObjectWithSimpleMap() {
         return ObjectGenerator.createObjectWithSimpleMap();
     }
 

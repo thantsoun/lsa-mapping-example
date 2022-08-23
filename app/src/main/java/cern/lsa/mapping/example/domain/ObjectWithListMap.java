@@ -8,12 +8,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 public class ObjectWithListMap {
 
-    @JsonSerialize(using = MyJsonSerializer.class)
+    @JsonSerialize(using = MyGenericJsonSerializer.class)
 //    @JsonDeserialize(using = MyJsonDeserializer.class)
     private final Map<MapKey, List<MapValue>> map;
     private final String someRandomString;
@@ -32,19 +33,19 @@ public class ObjectWithListMap {
         return someRandomString;
     }
 
-    public static abstract class MyAbstractJsonSerializer<K, V> extends JsonSerializer<Map<K, List<V>>> {
+    public static class MyGenericJsonSerializer<K, V> extends JsonSerializer<Map<K, Collection<V>>> {
 
         @Override
-        public void serialize(Map<K, List<V>> value, JsonGenerator gen, SerializerProvider provider)
+        public void serialize(Map<K, Collection<V>> value, JsonGenerator gen, SerializerProvider provider)
                 throws IOException {
             gen.writeStartArray();
-            for (Map.Entry<K, List<V>> entry: value.entrySet()) {
+            for (Map.Entry<K, Collection<V>> entry: value.entrySet()) {
                 writeMapEntry(gen, provider, entry);
             }
             gen.writeEndArray();
         }
 
-        private void writeMapEntry(JsonGenerator gen, SerializerProvider provider, Map.Entry<K, List<V>> entry) throws IOException {
+        private void writeMapEntry(JsonGenerator gen, SerializerProvider provider, Map.Entry<K, Collection<V>> entry) throws IOException {
             gen.writeStartArray();
             provider.defaultSerializeValue(entry.getKey(), gen);
             gen.writeStartArray();
@@ -56,5 +57,4 @@ public class ObjectWithListMap {
         }
     }
 
-    public static class MyJsonSerializer extends MyAbstractJsonSerializer<MapKey, MapValue> { }
 }

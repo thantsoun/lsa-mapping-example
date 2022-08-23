@@ -12,18 +12,18 @@ import java.util.Map;
 
 public class ObjectWithSimpleMap {
 
-    @JsonSerialize(using = MyJsonSerializer.class)
+    @JsonSerialize(using = MyGenericJsonSerializer.class)
 //    @JsonDeserialize(using = MyJsonDeserializer.class)
-    private final Map<MapKey, MapValue> map;
+    private final Map<MapKey, MapValue[]> map;
     private final String someRandomString;
 
     @JsonCreator
-    public ObjectWithSimpleMap(@JsonProperty("map") Map<MapKey, MapValue> map, @JsonProperty("someRandomString") String someRandomString) {
+    public ObjectWithSimpleMap(@JsonProperty("map") Map<MapKey, MapValue[]> map, @JsonProperty("someRandomString") String someRandomString) {
         this.map = map;
         this.someRandomString = someRandomString;
     }
 
-    public Map<MapKey, MapValue> getMap() {
+    public Map<MapKey, MapValue[]> getMap() {
         return map;
     }
 
@@ -31,7 +31,7 @@ public class ObjectWithSimpleMap {
         return someRandomString;
     }
 
-    public static abstract class MyAbstractJsonSerializer<K, V> extends JsonSerializer<Map<K, V>> {
+    public static class MyGenericJsonSerializer<K, V> extends JsonSerializer<Map<K, V>> {
 
         @Override
         public void serialize(Map<K, V> value, JsonGenerator gen, SerializerProvider provider)
@@ -51,5 +51,4 @@ public class ObjectWithSimpleMap {
         }
     }
 
-    public static class MyJsonSerializer extends MyAbstractJsonSerializer<MapKey, MapValue> { }
 }
