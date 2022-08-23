@@ -21,8 +21,13 @@ public class RestClientController {
     }
 
     @GetMapping("/map")
-    public ObjectWithMap getObjectWithMap() {
-        return restClientDtoTranslationService.getObjectWithMap();
+    public ObjectWithListMap getObjectWithListMap() {
+        return restClientDtoTranslationService.getObjectWithListMap();
+    }
+
+    @GetMapping("/map-simple")
+    public ObjectWithListMap getObjectWithSimpleMap() {
+        return restClientDtoTranslationService.getObjectWithSimpleMap();
     }
 
     @GetMapping("/attributes")

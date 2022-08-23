@@ -53,7 +53,12 @@ public class RestClientDtoTranslationService {
         return restClient.getReferencedCircularImmutable().toImmutable();
     }
 
-    public ObjectWithMap getObjectWithMap() {
-        return restClient.getObjectWithMap();
+    public ObjectWithListMap getObjectWithListMap() {
+        return restClient.getObjectWithListMap();
     }
+
+    public ObjectWithListMap getObjectWithSimpleMap() {
+        return restClient.getObjectWithSimpleMap();
+    }
+
 }

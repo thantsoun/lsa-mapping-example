@@ -3,14 +3,11 @@ package cern.lsa.mapping.example.domain;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import java.util.List;
-
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = MapValueImpl.class, name = "MapValue"),
+        @JsonSubTypes.Type(value = FooBarImpl.class, name = "FooBar"),
 })
-public interface MapValue {
-    String getSurname();
-    long getAge();
-    List<FooBar> getFooBarList();
+public interface FooBar {
+    String getFoo();
+    String getBar();
 }

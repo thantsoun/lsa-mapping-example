@@ -29,8 +29,13 @@ public class ExampleController {
     }
 
     @GetMapping("/map")
-    public ObjectWithMap getObjectWithMapAttributes() {
-        return ObjectGenerator.createObjectWithMap();
+    public ObjectWithListMap getObjectWithListMapAttributes() {
+        return ObjectGenerator.createObjectWithListMap();
+    }
+
+    @GetMapping("/map-simple")
+    public ObjectWithSimpleMap getObjectWithSimpleMapAttributes() {
+        return ObjectGenerator.createObjectWithSimpleMap();
     }
 
     @GetMapping("/attributes")
