@@ -8,23 +8,14 @@ import java.util.*;
 public class ObjectGenerator {
 
     public static ObjectWithListMap createObjectWithListMap() {
-        Map<MapKey, List<MapValue>> map = new HashMap<>();
-        map.put(new MapKeyImpl("Thanos", 1),
-                Arrays.asList(
-                        new MapValueImpl("Tsounis", 44, Arrays.asList(new FooBarImpl("foo1", "bar1"), new FooBarImpl("foo2", "bar2"))),
-                        new MapValueImpl("Fadakis", 30, Arrays.asList(new FooBarImpl("foo3", "bar3"), new FooBarImpl("foo4", "bar4")))
-                )
-        );
-        map.put(new MapKeyImpl("Roman", 2),
-                Arrays.asList(
-                        new MapValueImpl("Gorbonosov", 42, Arrays.asList(new FooBarImpl("foo5", "bar5"), new FooBarImpl("foo6", "bar6"))),
-                        new MapValueImpl("Abramovic", 99, Arrays.asList(new FooBarImpl("foo7", "bar7"), new FooBarImpl("foo8", "bar8")))
-                )
-        );
-        return new ObjectWithListMap(map, "Hello");
+        return new ObjectWithListMap(getKeyListMap(), "Hello");
     }
 
     public static  Map<MapKey, List<MapValue>> createRawListMap() {
+        return getKeyListMap();
+    }
+
+    private static Map<MapKey, List<MapValue>> getKeyListMap() {
         Map<MapKey, List<MapValue>> map = new HashMap<>();
         map.put(new MapKeyImpl("Thanos", 1),
                 Arrays.asList(

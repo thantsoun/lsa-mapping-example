@@ -22,8 +22,9 @@ public class CernConfig {
     private void registerContextDtoSubtype() {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.registerSubtypes(CernNameSurname.class);
-        this.objectMapper.registerModule(simpleModule);
-        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-//        this.objectMapper.disable(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS);
+        simpleModule.setSerializerModifier(new MapSerializerModifier());
+        objectMapper.registerModule(simpleModule);
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
+
 }

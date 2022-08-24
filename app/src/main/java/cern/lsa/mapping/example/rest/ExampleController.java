@@ -7,7 +7,6 @@ import cern.lsa.mapping.example.dto.gsi.GsiNameSurname;
 import cern.lsa.mapping.example.mappers.MapperFacade;
 import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,19 +29,8 @@ public class ExampleController {
     }
 
     @GetMapping("/map-raw")
-    public Hack getRawListMap() {
-        return new Hack(ObjectGenerator.createRawListMap());
-    }
-
-    public static class Hack {
-
-        @JsonUnwrapped
-        @JsonSerialize(using = ObjectWithListMap.MyGenericJsonSerializer.class)
-        public final Map<MapKey, List<MapValue>> hack;
-
-        public Hack(Map<MapKey, List<MapValue>> hack) {
-            this.hack = hack;
-        }
+    public Map<MapKey, List<MapValue>> getRawListMap() {
+        return ObjectGenerator.createRawListMap();
     }
 
     @GetMapping("/map-simple")
