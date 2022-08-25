@@ -15,7 +15,7 @@ public class ObjectGenerator {
         return getKeyListMap();
     }
 
-    private static Map<MapKey, List<MapValue>> getKeyListMap() {
+    public static Map<MapKey, List<MapValue>> getKeyListMap() {
         Map<MapKey, List<MapValue>> map = new HashMap<>();
         map.put(new MapKeyImpl("Thanos", 1),
                 Arrays.asList(
@@ -33,13 +33,13 @@ public class ObjectGenerator {
     }
 
     public static ObjectWithSimpleMap createObjectWithSimpleMap() {
-        Map<MapKey, MapValue[]> map = new HashMap<>();
+        Map<MapKey, Object[]> map = new HashMap<>();
         map.put(new MapKeyImpl("Thanos", 1),
                         new MapValue[] { new MapValueImpl("Tsounis", 44, Arrays.asList(new FooBarImpl("foo1", "bar1"), new FooBarImpl("foo2", "bar2"))) }
 
         );
         map.put(new MapKeyImpl("Roman", 2),
-                new MapValue[] { new MapValueImpl("Gorbonosov", 42, Arrays.asList(new FooBarImpl("foo5", "bar5"), new FooBarImpl("foo6", "bar6"))) }
+                new Object[] { new MapValueImpl("Gorbonosov", 42, Arrays.asList(new FooBarImpl("foo5", "bar5"), new FooBarImpl("foo6", "bar6"))) }
         );
         return new ObjectWithSimpleMap(map, "Hello");
     }

@@ -8,15 +8,24 @@ import cern.lsa.mapping.example.mappers.MapperFacade;
 import cern.lsa.mapping.example.referenced.ModifiableReferencedCircularImmutable;
 import cern.lsa.mapping.example.referenced.ReferencedCircularImmutable;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Collections.singletonList;
 
 @RestController
 public class ExampleController {
 
+    @Autowired
+    private ObjectMapper objectMapper;
     private final MapperFacade mapperFacade;
 
     public ExampleController(MapperFacade mapperFacade) {
@@ -25,12 +34,42 @@ public class ExampleController {
 
     @GetMapping("/map")
     public ObjectWithListMap getObjectWithListMap() {
+        try {
+            Object obj = ObjectGenerator.getKeyListMap();
+            System.out.println(objectMapper.writeValueAsString(obj));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return ObjectGenerator.createObjectWithListMap();
     }
 
     @GetMapping("/map-raw")
     public Map<MapKey, List<MapValue>> getRawListMap() {
         return ObjectGenerator.createRawListMap();
+    }
+
+
+    @GetMapping("/map-test")
+    public Object[] getObject() {
+        return new Object[] {new MapKeyImpl("Thanos", 1),
+                Arrays.asList(
+                        new MapValueImpl("Tsounis", 44, Arrays.asList(new FooBarImpl("foo1", "bar1"), new FooBarImpl("foo2", "bar2"))),
+                        new MapValueImpl("Fadakis", 30, Arrays.asList(new FooBarImpl("foo3", "bar3"), new FooBarImpl("foo4", "bar4")))
+                )};
+    }
+
+    @GetMapping("/map-weird")
+    public Map<Map<String, List<String>>, List<List<String>>> getWeirdMap() {
+        Map<Map<String, List<String>>, List<List<String>>> weirdMap = new HashMap<>();
+        List<List<String>> value = Arrays.asList(Arrays.asList("1", "2"), Arrays.asList("3", "4", "5"));
+        weirdMap.put(null, value);
+        Map<String, List<String>> key = Stream.of(new String[][]{
+                {"Hello", "World"},
+                {"John", "Doe"},
+        }).collect(Collectors.toMap(data -> data[0], data -> singletonList(data[1])));
+//        weirdMap.put(key, null);
+        weirdMap.put(key, value);
+        return weirdMap;
     }
 
     @GetMapping("/map-simple")
@@ -66,7 +105,7 @@ public class ExampleController {
         ModifiableReferencedCircularImmutable sibling = circularImmutablesObjectGenerator.createModifiableCircular("Miss", "Joan", "I am the sister");
         ModifiableReferencedCircularImmutable parent = circularImmutablesObjectGenerator.createModifiableCircular("Mr.", "Bob", "I am your father");
 
-        circularImmutablesObjectGenerator.setChildren(node, Collections.singletonList(child));
+        circularImmutablesObjectGenerator.setChildren(node, singletonList(child));
         circularImmutablesObjectGenerator.setParent(node, parent);
         circularImmutablesObjectGenerator.setChildren(parent, Arrays.asList(node, sibling));
         circularImmutablesObjectGenerator.setParent(sibling, parent);

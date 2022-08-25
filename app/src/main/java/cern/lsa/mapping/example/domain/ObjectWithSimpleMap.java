@@ -8,17 +8,16 @@ import java.util.Map;
 
 public class ObjectWithSimpleMap {
 
-
     private static int counter;
 
-    private final Map<MapKey, MapValue[]> map;
-    private final Map<MapKey, MapValue> map2;
+    private final Map<MapKey, Object[]> map;
+    private final Map<MapKey, Object> map2;
     private final Map<MapKey, Integer> map3;
     private final Map<MapKey, String> map4;
     private final String someRandomString;
 
     @JsonCreator
-    public ObjectWithSimpleMap(@JsonProperty("map") Map<MapKey, MapValue[]> map, @JsonProperty("someRandomString") String someRandomString) {
+    public ObjectWithSimpleMap(@JsonProperty("map") Map<MapKey, Object[]> map, @JsonProperty("someRandomString") String someRandomString) {
         this.map = map;
         this.map2 = new HashMap<>();
         this.map3 = new HashMap<>();
@@ -31,11 +30,11 @@ public class ObjectWithSimpleMap {
         this.someRandomString = someRandomString;
     }
 
-    public Map<MapKey, MapValue[]> getMap() {
+    public Map<MapKey, Object[]> getMap() {
         return map;
     }
 
-    public Map<MapKey, MapValue> getMap2() {
+    public Map<MapKey, Object> getMap2() {
         return map2;
     }
 
