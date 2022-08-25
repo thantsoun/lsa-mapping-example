@@ -49,13 +49,26 @@ public class ExampleController {
     }
 
 
-    @GetMapping("/map-test")
-    public Object[] getObject() {
-        return new Object[] {new MapKeyImpl("Thanos", 1),
-                Arrays.asList(
-                        new MapValueImpl("Tsounis", 44, Arrays.asList(new FooBarImpl("foo1", "bar1"), new FooBarImpl("foo2", "bar2"))),
-                        new MapValueImpl("Fadakis", 30, Arrays.asList(new FooBarImpl("foo3", "bar3"), new FooBarImpl("foo4", "bar4")))
-                )};
+    @GetMapping("/list")
+    public List<Object> getList() {
+        int length = 10;
+        MapKey thanos = new MapKeyImpl("Thanos", 1);
+        List<Object> ret = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            ret.add(thanos);
+        }
+        return ret;
+    }
+
+    @GetMapping("/array")
+    public Object[] getArray() {
+        int length = 10;
+        MapKey thanos = new MapKeyImpl("Thanos", 1);
+        Object[] ret = new Object[length];
+        for (int i = 0; i < length; i++) {
+            ret[i] = thanos;
+        }
+        return ret;
     }
 
     @GetMapping("/map-weird")

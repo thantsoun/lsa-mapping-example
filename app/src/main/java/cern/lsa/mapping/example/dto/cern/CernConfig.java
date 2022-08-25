@@ -27,8 +27,4 @@ public class CernConfig {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public static void main(String[] args) {
-
-    }
-
 }
