@@ -4,11 +4,17 @@ import cern.lsa.mapping.example.TestEnums.domain.*;
 import cern.lsa.mapping.example.TestEnums.json.EnumAsJsonObject;
 import cern.lsa.mapping.example.TestEnums.json.EnumDeserializerModifier;
 import cern.lsa.mapping.example.TestEnums.json.EnumSerializerModifier;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 import java.util.Arrays;
+import java.util.List;
+
+import static cern.lsa.mapping.example.TestEnums.domain.MyEnum.BLA;
 
 public class TestMain {
 
@@ -87,12 +93,61 @@ public class TestMain {
             } catch (Exception e) {
                 System.out.println("Correctly received exception: " + e.getMessage());
             }
-            MyEnum[] enumArray = new MyEnum[]{MyEnum.BLA, MyEnum.BLA};
-            json = objectMapper.writeValueAsString(enumArray);
+            Person thanos = new Person("Thanos", "Tsounis");
+            AB abPerson = new AB(thanos, thanos);
+            AB abEnum = new AB(BLA, BLA);
+            json = objectMapper.writeValueAsString(abPerson);
             System.out.println(json);
-            System.out.println(Arrays.deepToString(objectMapper.readValue(json, MyEnum[].class)));
+            AB readAB = objectMapper.readValue(json, AB.class);
+            json = objectMapper.writeValueAsString(abEnum);
+            System.out.println(json);
+            readAB = objectMapper.readValue(json, AB.class);
+            CollectionType javaType = objectMapper.getTypeFactory().constructCollectionType(List.class, HasSecondName.class);
+            List<HasSecondName> list = Arrays.asList(BLA, BLA, BLA);
+            json = objectMapper.writeValueAsString(list);
+            System.out.println(json);
+            List<HasSecondName> readList = objectMapper.readValue(json, javaType);
+            list = Arrays.asList(thanos, thanos, thanos);
+            json = objectMapper.writeValueAsString(list);
+            System.out.println(json);
+            readList = objectMapper.readValue(json, javaType);
+            list = Arrays.asList(thanos, BLA, thanos, BLA);
+            json = objectMapper.writeValueAsString(list);
+            System.out.println(json);
+            readList = objectMapper.readValue(json, javaType);
+            
+            System.out.println(objectMapper.readValue(objectMapper.writeValueAsString(BLA), HasSecondName.class));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    static class AB {
+
+        private final HasSecondName a;
+        private final HasSecondName b;
+
+        @JsonCreator
+        AB(@JsonProperty("a") HasSecondName a, @JsonProperty("b")HasSecondName b) {
+            this.a = a;
+            this.b = b;
+        }
+
+
+        public HasSecondName getA() {
+            return a;
+        }
+
+        public HasSecondName getB() {
+            return b;
+        }
+
+        @Override
+        public String toString() {
+            return "AB{" +
+                    "a=" + a +
+                    ", b=" + b +
+                    '}';
         }
     }
 

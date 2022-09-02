@@ -2,8 +2,6 @@ package cern.lsa.mapping.example.TestEnums.json;
 
 import cern.lsa.mapping.example.TestEnums.domain.Named;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public class EnumsInJsonEnforcer {

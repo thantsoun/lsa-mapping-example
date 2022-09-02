@@ -11,7 +11,7 @@ public class EnumDeserializerModifier extends BeanDeserializerModifier {
     private final EnumsInJsonEnforcer enumsInJsonEnforcer = new EnumsInJsonEnforcer();
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public JsonDeserializer<?> modifyEnumDeserializer(DeserializationConfig config, JavaType type, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
         Class<?> clazz = beanDesc.getBeanClass();
         if (clazz.isEnum()) {

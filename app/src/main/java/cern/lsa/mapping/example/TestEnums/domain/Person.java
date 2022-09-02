@@ -1,7 +1,6 @@
 package cern.lsa.mapping.example.TestEnums.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 public class Person implements HasSecondName {
 
